@@ -18,10 +18,9 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><i class="fa-solid fa-chart-gantt"></i>Infografis Kabupaten
-                Purworejo</a>
+            <a class="navbar-brand" href="#"><i class="fa-solid fa-chart-gantt"></i>Infografis Kabupaten Purworejo</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
                 aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -42,7 +41,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-disabled="true" data-bs-toggle="modal"
+                        <a class="nav-link" aria-disabled="true" data-bs-toggle="modal" 
                             data-bs-target="#infoModal"><i class="fa-solid fa-circle-info"></i>Info</a>
                     </li>
                 </ul>
@@ -53,7 +52,7 @@
     <div class="container mt-4">
         <div class="card">
             <div class="card-header">
-                <h4>Jumlah Penduduk</h4>
+                <h4>Jumlah Pegawai Negeri Sipil Menurut Tingkat Pendidikan dan Jenis Kelamin</h4>
             </div>
             <div class="card-body">
                 <div id="chart"></div>
@@ -67,7 +66,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel"><i
-                            class="fa-solid fa-circle-info"></i>Information</h1>
+                        class="fa-solid fa-circle-info"></i>Information</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -94,68 +93,94 @@
 
     <script>
         var options = {
-            series: [{
-                name: 'Jumlah Penduduk',
-                data: [49303, 35026, 41364, 30507, 31838, 85107, 43339, 51583, 62151, 42120, 51495, 58724, 52698, 43539, 38213, 56581]
-            }],
+            series: [
+                {
+                    data: [
+                        {
+                            x: 'Sekolah Dasar (SD)',
+                            y: [28, 8]
+                        },
+                        {
+                            x: 'Sekolah Menengah Pertama (SMP)',
+                            y: [96, 16]
+                        },
+                        {
+                            x: 'Sekolah Menengah Atas (SMA)',
+                            y: [677, 238]
+                        },
+                        {
+                            x: 'Diploma I/Akta I',
+                            y: [8, 5]
+                        },
+                        {
+                            x: 'Diploma II/Akta II',
+                            y: [60, 46]
+                        },
+                        {
+                            x: 'Diploma III/Akta III',
+                            y: [247, 795]
+                        },
+                        {
+                            x: 'Diploma IV/Akta IV',
+                            y: [31, 82]
+                        },
+                        {
+                            x: 'S1/Sarjana',
+                            y: [1317, 2280]
+                        },
+                        {
+                            x: 'S2/Pasca Sarjana',
+                            y: [362, 390]
+                        },
+                        {
+                            x: 'S3/Doktor/Ph.D',
+                            y: [2, 0]
+                        }
+                    ]
+                }
+            ],
             chart: {
-                type: 'bar',
-                height: 350
+                height: 350,
+                type: 'rangeBar',
+                zoom: {
+                    enabled: false
+                }
             },
+            colors: ['#4986E7', '#f664af'],
             plotOptions: {
                 bar: {
-                    horizontal: false,
-                    columnWidth: '55%',
-                    endingShape: 'rounded',
-                    dataLabels: {
-                        position: 'top',
-                    }
-                },
+                    horizontal: true,
+                    isDumbbell: true,
+                    dumbbellColors: [['#4986E7', '#f664af']]
+                }
             },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
+            legend: {
                 show: true,
-                width: 2,
-                colors: ['transparent']
-            },
-            xaxis: {
-                categories: ['Grabag', 'Ngombol', 'Purwodadi', 'Bagelen', 'Kaligesing', 'Purworejo', 'Banyuurip', 'Bayan', 'Kutoarjo', 'Butuh', 'Pituruh', 'Kemiri', 'Bruno', 'Gebang', 'Loano', 'Bener'],
-                title: {
-                    text: 'Kecamatan'
-                }
-            },
-            yaxis: {
-                title: {
-                    text: 'Jiwa'
-                }
+                showForSingleSeries: true,
+                position: 'top',
+                horizontalAlign: 'left',
+                customLegendItems: ['Laki-Laki', 'Perempuan']
             },
             fill: {
-                opacity: 1
+                type: '',
+                colors: '#969696'
             },
-            tooltip: {
-                y: {
-                    formatter: function (val) {
-                        return val + " jiwa"
+            grid: {
+                xaxis: {
+                    lines: {
+                        show: true
+                    }
+                },
+                yaxis: {
+                    lines: {
+                        show: false
                     }
                 }
-            },
-            dataLabels: {
-                enabled: true,
-                formatter: function (val) {
-                    return val;
-                },
-                offsetY: -20,
-                style: {
-                    fontSize: '12px',
-                    colors: ["#304758"]
-                }
-            },
+            }
         };
 
-            var chart = new ApexCharts(document.querySelector("#chart"), options);
-            chart.render();
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
     </script>
 </body>
 
